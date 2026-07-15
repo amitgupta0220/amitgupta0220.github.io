@@ -1,0 +1,69 @@
+import { Link } from "react-router-dom";
+import { config } from "../config";
+import "./MyWorks.css";
+
+const MyWorks = () => {
+  return (
+    <div className="myworks-page">
+      <div className="myworks-header">
+        <Link to="/" className="back-button" data-cursor="disable">
+          ← Back to Home
+        </Link>
+
+        <h1>
+          All <span>Works</span>
+        </h1>
+
+        <p>A collection of all my projects and creations</p>
+      </div>
+
+      <div className="myworks-grid">
+        {config.projects.map((project, index) => (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="myworks-card"
+            key={project.id}
+            aria-label={`View ${project.title} project`}
+            data-cursor="disable"
+          >
+            <div className="myworks-card-number">
+              {String(index + 1).padStart(2, "0")}
+            </div>
+
+            <div className="myworks-card-image">
+              <img
+                src={project.image}
+                alt={`${project.title} project preview`}
+                loading="lazy"
+              />
+            </div>
+
+            <div className="myworks-card-info">
+              <h3>{project.title}</h3>
+
+              <p className="myworks-card-category">
+                {project.category}
+              </p>
+
+              <p className="myworks-card-description">
+                {project.description}
+              </p>
+
+              <p className="myworks-card-tech">
+                {project.technologies}
+              </p>
+
+              <span className="myworks-card-link">
+                View project ↗
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default MyWorks;
